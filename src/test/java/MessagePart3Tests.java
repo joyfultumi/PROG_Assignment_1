@@ -62,6 +62,23 @@ public class MessagePart3Tests {
         MessagePart3.populateMessageArrays(allMessages);
     }
 
+    @Test
+    public void testSentMessagesArrayPopulatedCorrectly() {
+        MessagePart3[] sentMessages = MessagePart3.getSentMessagesArray();
+
+        assertEquals(2, sentMessages.length);
+        assertEquals("Did you get the cake?", sentMessages[0].getMessageText());
+        assertEquals("It is dinner time !", sentMessages[1].getMessageText());
+    }
+
+    @Test
+    public void testDisregardedMessagesArrayPopulatedCorrectly() {
+        MessagePart3[] disregardedMessages = MessagePart3.getDisregardedMessagesArray();
+
+        assertEquals(1, disregardedMessages.length);
+        assertEquals("Yohoooo, I am at your gate.", disregardedMessages[0].getMessageText());
+    }
+
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
