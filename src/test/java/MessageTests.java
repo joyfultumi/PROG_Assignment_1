@@ -55,4 +55,101 @@ public class MessageTests {
         );
     }
 
+    @Test
+    public void testMessageHashNotNull() {
+        Message message = new Message(1, "+27718693002", "Hi Mike, can you join us for dinner tonight?");
+        assertNotNull(message.createMessageHash());
+    }
+
+    @Test
+    public void testMessageHashFormat() {
+        Message message = new Message(0, "+27718693002", "Hi Mike");
+        String hash = message.createMessageHash();
+
+        assertTrue(hash.contains(":"));
+        assertEquals(hash, hash.toUpperCase());
+    }
+
+    @Test
+    public void testMessageIdCreated() {
+        Message message = new Message(1, "+27718693002", "Hi Mike, can you join us for dinner tonight?");
+        assertTrue(message.checkMessageID());
+    }
+
+    @Test
+    public void testSendMessageOptionSend() {
+        Message message = new Message(1, "+27718693002", "Hi Mike, can you join us for dinner tonight?");
+        assertEquals("Message successfully sent.", message.sentMessage(1));
+    }
+
+    @Test
+    public void testSendMessageOptionDiscard() {
+        Message message = new Message(2, "0857975889", "Hi Keegan, did you receive the payment?");
+        assertEquals("Press 0 to delete the message.", message.sentMessage(2));
+    }
+
+    @Test
+    public void testSendMessageOptionStore() {
+        Message message = new Message(1, "+27718693002", "Hi Mike, can you join us for dinner tonight?");
+        assertEquals("Message successfully stored.", message.sentMessage(3));
+    }
+
+    @Test
+    public void testReturnTotalMessages() {
+        Message message = new Message(2, "+27718693002", "Hi Mike, can you join us for dinner tonight?");
+        assertEquals(2, message.returnTotalMessages());
+    }
+
+    @Test
+    public void testPrintMessagesContainsDetails() {
+        Message message = new Message(1, "+27718693002", "Hi Mike, can you join us for dinner tonight?");
+        String output = message.printMessages();
+
+        assertTrue(output.contains("Message ID:"));
+        assertTrue(output.contains("Message Hash:"));
+        assertTrue(output.contains("Recipient: +27718693002"));
+        assertTrue(output.contains("Message: Hi Mike, can you join us for dinner tonight?"));
+    }
+    
+    
+    @Test
+    public void testMessageHashIsCorrect() {
+        Message message = new Message("0000000000", 0, "+27718693002",
+                "Hi Mike, can you join us for dinner tonight?");
+
+        assertEquals("00:0:HITONIGHT?", message.createMessageHash());
+    }
+
+    @Test
+    public void testMessageIDCreated() {
+        Message message = new Message("1234567890", 0, "+27718693002",
+                "Hi Mike, can you join us for dinner tonight?");
+
+        assertTrue(message.checkMessageID());
+        assertEquals("1234567890", message.getMessageID());
+    }
+
+    @Test
+    public void testSentMessageOptionSend() {
+        Message message = new Message("1234567890", 0, "+27718693002",
+                "Hi Mike, can you join us for dinner tonight?");
+
+        assertEquals("Message successfully sent.", message.sentMessage(1));
+    }
+
+    @Test
+    public void testSentMessageOptionDiscard() {
+        Message message = new Message("1234567890", 1, "0857975889",
+                "Hi Keegan, did you receive the payment?");
+
+        assertEquals("Press 0 to delete the message.", message.sentMessage(2));
+    }
+
+    @Test
+    public void testSentMessageOptionStore() {
+        Message message = new Message("1234567890", 1, "+27718693002",
+                "Hi Mike, can you join us for dinner tonight?");
+
+        assertEquals("Message successfully stored.", message.sentMessage(3));
+    }
 }
