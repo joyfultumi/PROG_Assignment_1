@@ -5,6 +5,16 @@
 package com.mycompany.assignment;
 import java.util.Random;
 
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
+
 /**
  *
  * @author tumithobejane
@@ -16,6 +26,9 @@ public class Message {
     private String messageText;
     private int messageNumber;
     Login login;
+    
+    private static final String FILE_NAME = "stored_messages.json";
+    
     public Message( int messageNumber, String recipient, String messageText ){
         
         this.messageId = createRandomMessageId(10);
@@ -93,6 +106,7 @@ public class Message {
         } else if (choice == 2) {
             return "Press 0 to delete the message.";
         } else if (choice == 3) {
+            storeMessageToJson();
             return "Message successfully stored.";
         } else {
             return "Invalid option.";
@@ -127,5 +141,35 @@ public class Message {
     public String getMessageText() {
         return messageText;
     }
+    
+   
+    public void storeMessageToJson() {
+
+         Gson gson = new GsonBuilder().setPrettyPrinting().create();
+         ArrayList<Message> messages = new ArrayList<>();
+
+            // Read existing messages
+            try (FileReader reader = new FileReader(FILE_NAME)) {
+                Type listType = new TypeToken<ArrayList<Message>>() {}.getType();
+                ArrayList<Message> existing = gson.fromJson(reader, listType);
+
+                if (existing != null) {
+                    messages = existing;
+                }
+
+            } catch (IOException e) {
+            // file might not exist yet → start fresh
+            }
+
+            // Add current message
+            messages.add(this);
+
+            // Write back to file
+            try (FileWriter writer = new FileWriter(FILE_NAME)) {
+                   gson.toJson(messages, writer);
+            } catch (IOException e) {
+                System.out.println("Error saving message to JSON.");
+            }
+        }
 
 }
