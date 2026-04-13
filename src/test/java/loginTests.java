@@ -62,7 +62,19 @@ public class loginTests {
         
         assertFalse(login.checkUserName(invalidUsername));
     }
-  
+    
+    @Test
+    public void testPasswordComplexityIsCorrect(){
+        assertTrue(login.checkPasswordComplexity(validPassword));
+    }
+    
+    @Test
+    public void testPasswordIncorrectComplexity(){
+        assertFalse(login.checkPasswordComplexity(invalidPassword));
+    }
+    
+    
+    
     
     
     // TODO add test methods here.
