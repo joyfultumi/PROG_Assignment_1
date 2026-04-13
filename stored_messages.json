@@ -1,16 +1,18 @@
 [
   {
-    "messageId": "9147679812",
-    "recipient": "+27849295070",
-    "messageText": "Save the first onbe",
-    "messageNumber": 1,
-    "login": {}
+    "messageID": "1000000002",
+    "messageNumber": 2,
+    "sender": "Developer",
+    "recipient": "+27838884567",
+    "messageText": "Where are you? You are late! I have asked you to be on time.",
+    "flag": "Stored"
   },
   {
-    "messageId": "5691910075",
-    "recipient": "+27839745316",
-    "messageText": "Second message ",
-    "messageNumber": 2,
-    "login": {}
+    "messageID": "1000000005",
+    "messageNumber": 5,
+    "sender": "Developer",
+    "recipient": "+27838884567",
+    "messageText": "Ok, I am leaving without you.",
+    "flag": "Stored"
   }
 ]
