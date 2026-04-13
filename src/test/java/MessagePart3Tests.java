@@ -124,6 +124,44 @@ public class MessagePart3Tests {
         );
     }
 
+    @Test
+    public void testDeleteMessageByHash() {
+        String hashToDelete = MessagePart3.getStoredMessagesArray()[0].createMessageHash();
+
+        String result = MessagePart3.deleteMessageByHash(hashToDelete);
+
+        assertEquals(
+                "Message: \"Where are you? You are late! I have asked you to be on time.\" successfully deleted.",
+                result
+        );
+    }
+
+    @Test
+    public void testDisplayMessageReport() {
+        String report = MessagePart3.displayMessageReport();
+
+        assertTrue(report.contains("STORED MESSAGE REPORT"));
+        assertTrue(report.contains("Recipient: +27838884567"));
+        assertTrue(report.contains("Message: Where are you? You are late! I have asked you to be on time."));
+        assertTrue(report.contains("Message: Ok, I am leaving without you."));
+    }
+
+    @Test
+    public void testMessageHashesArrayPopulated() {
+        String[] hashes = MessagePart3.getMessageHashesArray();
+
+        assertNotNull(hashes);
+        assertTrue(hashes.length >= 6);
+    }
+
+    @Test
+    public void testMessageIDsArrayPopulated() {
+        String[] ids = MessagePart3.getMessageIDsArray();
+
+        assertNotNull(ids);
+        assertTrue(ids.length >= 6);
+    }
+
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
