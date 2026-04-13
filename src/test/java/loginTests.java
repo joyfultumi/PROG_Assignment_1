@@ -74,6 +74,20 @@ public class loginTests {
     }
     
     
+    @Test
+    public void testCellPhoneNumberFormatIsCorrect(){
+        
+        assertTrue(login.checkCellPhoneNumber(validCell));
+        
+    }
+    
+    @Test
+    public void testCellPhoneNumberIncorrectFormat(){
+        
+        assertFalse(login.checkCellPhoneNumber(invalidCell));
+        
+    }
+    
     
     
     
