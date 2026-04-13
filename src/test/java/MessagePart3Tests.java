@@ -79,6 +79,27 @@ public class MessagePart3Tests {
         assertEquals("Yohoooo, I am at your gate.", disregardedMessages[0].getMessageText());
     }
 
+    @Test
+    public void testStoredMessagesArrayPopulatedCorrectly() {
+        MessagePart3[] storedMessages = MessagePart3.getStoredMessagesArray();
+
+        assertEquals(2, storedMessages.length);
+        assertEquals("Where are you? You are late! I have asked you to be on time.", storedMessages[0].getMessageText());
+        assertEquals("Ok, I am leaving without you.", storedMessages[1].getMessageText());
+    }
+
+    @Test
+    public void testDisplayStoredSendersAndRecipients() {
+        String result = MessagePart3.displayStoredSendersAndRecipients();
+
+        assertEquals(
+                "Sender: Developer, Recipient: +27838884567\n" +
+                "Sender: Developer, Recipient: +27838884567\n",
+                result
+        );
+    }
+
+   
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
