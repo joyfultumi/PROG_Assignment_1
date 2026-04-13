@@ -88,6 +88,73 @@ public class loginTests {
         
     }
     
+    @Test
+    public void testRegisterUserSuccessfully() {
+        String result = login.registerUser(firstname, lastname, validUsername, validPassword, validCell);
+        assertEquals("User has been registered successfully.", result);
+    }
+
+    @Test
+    public void testRegisterUserWithBadUsername() {
+        String result = login.registerUser(firstname, lastname, invalidUsername, validPassword, validCell);
+
+        assertEquals(
+            "Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length.",
+            result
+        );
+    }
+
+    @Test
+    public void testRegisterUserWithBadPassword() {
+        String result = login.registerUser(firstname, lastname, validUsername, invalidPassword, validCell);
+
+        assertEquals(
+            "Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.",
+            result
+        );
+    }
+
+    @Test
+    public void testRegisterUserWithBadCellNumber() {
+        String result = login.registerUser(firstname, lastname, validUsername, validPassword, invalidCell);
+
+        assertEquals(
+            "Cell phone number incorrectly formatted or does not contain international code; please correct the number and try again.",
+            result
+        );
+    }
+
+    @Test
+    public void testLoginSuccessful() {
+        login.registerUser(firstname, lastname, validUsername, validPassword, validCell);
+        assertTrue(login.loginUser(validUsername, validPassword));
+    }
+
+    @Test
+    public void testLoginFailed() {
+        login.registerUser(firstname, lastname, validUsername, validPassword, validCell);
+        assertFalse(login.loginUser(validUsername, "Wrong@123"));
+    }
+
+    @Test
+    public void testReturnLoginStatusSuccess() {
+        login.registerUser(firstname, lastname, validUsername, validPassword, validCell);
+        String result = login.returnLoginStatus(true);
+
+        assertEquals(
+            "Welcome " + firstname + ", " + lastname + " it is great to see you again.",
+            result
+        );
+    }
+
+    @Test
+    public void testReturnLoginStatusFailure() {
+        String result = login.returnLoginStatus(false);
+        assertEquals("Username or password incorrect, please try again.", result);
+    }
+    
+    
+    
     
     
     
