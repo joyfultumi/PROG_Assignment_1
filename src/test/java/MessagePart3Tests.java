@@ -99,7 +99,31 @@ public class MessagePart3Tests {
         );
     }
 
-   
+    @Test
+    public void testDisplayLongestStoredMessage() {
+        assertEquals(
+                "Where are you? You are late! I have asked you to be on time.",
+                MessagePart3.displayLongestStoredMessage()
+        );
+    }
+
+    @Test
+    public void testSearchMessageByID() {
+        assertEquals(
+                "Recipient: +27838884567\nMessage: Where are you? You are late! I have asked you to be on time.",
+                MessagePart3.searchMessageByID("1000000002")
+        );
+    }
+
+    @Test
+    public void testSearchMessagesByRecipient() {
+        assertEquals(
+                "Where are you? You are late! I have asked you to be on time.\n" +
+                "Ok, I am leaving without you.\n",
+                MessagePart3.searchMessagesByRecipient("+27838884567")
+        );
+    }
+
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
